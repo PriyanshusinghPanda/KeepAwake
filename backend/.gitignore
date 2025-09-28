@@ -1,5 +1,6 @@
 # folders
 node_modules
+temp_folder
 
 # files
 package-lock.json

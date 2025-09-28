@@ -1,5 +1,6 @@
 // pakages/backend/server.js
 const express = require('express');
+const mongoose = require('mongoose')
 const cors = require('cors');
 const dotenv = require('dotenv');
 const route = require('./routes');
@@ -23,6 +24,10 @@ if (NODE_ENV === 'development') {
         next();
     });
 }
+
+const MONGO_URL = process.env.MONGO_URI
+mongoose.connect(MONGO_URL)
+    .then()
 
 // Use routes defined in routes.js
 app.use('/api', route);
