@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose')
 const cors = require('cors');
 const dotenv = require('dotenv');
-const route = require('./routes');
+// const route = require('./routesç');
+const sign = require('./auth/Login')
 
 // Load environment variables from .env file
 dotenv.config();
@@ -25,13 +26,15 @@ if (NODE_ENV === 'development') {
     });
 }
 
-const MONGO_URL = process.env.MONGO_URI
-mongoose.connect(MONGO_URL)
-    .then()
+const MONGO_URI = process.env.MONGO_URI;
+mongoose.connect(MONGO_URI)
+    .then(() => console.log('Connected to MongoDB successfully!'))
+    .catch((error) => console.error('MongoDB connection error:', error));
 
 // Use routes defined in routes.js
-app.use('/api', route);
+// app.use('/api', route);
 
+app.use("/signup", sign);
 // Sample route
 app.get("/", (req, res) => {
     res.send("Hello, World!");
